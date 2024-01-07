@@ -15,20 +15,20 @@ export async function getNotes() {
     return rows
 }
 
-export async fuction getNote(id) {
-    const [rows] = await pool.query('
+export async function getNote(id) {
+    const [rows] = await pool.query(`
     SELECT *
     FROM notes
     WHERE id = ?   
-    ', [id])
+    `, [id])
     return rows[0]
 }
 
-export async fuction createNote(title, content) {
-    const [result] = await pool.query('
+export async function createNote(title, content) {
+    const [result] = await pool.query(`
     INSERT INTO notes (title, content)
     VALUES (?, ?)
-    ', [title, content])
+    `, [title, content])
     const id = result.insertid
     return getNote(id)
 }
