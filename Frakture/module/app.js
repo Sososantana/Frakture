@@ -1,17 +1,20 @@
-import express from 'express'
+const express = require('express');
+const app = express();
+const port = 8080;
 
-const app = express()
+app.listen(port, function (error) {
+    if (error) {
+        console.log('Something went wrong', error);
+    } else {
+        console.log('Server is listening on port ' + port);
+    }
+});
 
 app.get("/notes", (req, res) => {
-    res.send("this should be the notes")
-})
-
+    res.send("This should be the notes");
+});
 
 app.use((err, req, res, next) => {
-    console.error(err.stack)
-    res.status(500).send('Something broke!')
-})
-
-app.listen(8080, () => {
-    console.log('Server is running on port 8080')
-})
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
